@@ -46,7 +46,7 @@ stages:
     jobs:
       - deployment: PreProd
         environment: PreProd Env
-        dependsOn: DevStage
+        # dependsOn: QAStage
         strategy:
          runOnce:
            deploy:
@@ -57,8 +57,7 @@ stages:
     jobs:
       - deployment: NonProd
         environment: NonProd Env
-        dependsOn:
-        - DevStage
+        # dependsOn: QAStage
         strategy:
           runOnce:
            deploy:
@@ -68,7 +67,7 @@ stages:
     jobs:
       - deployment: Prod
         environment: Prod Env
-        dependsOn: Preprodstage
+        # dependsOn: Preprodstage
         strategy:
           runOnce:
            deploy:
