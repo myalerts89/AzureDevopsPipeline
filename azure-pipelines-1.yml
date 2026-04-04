@@ -16,11 +16,13 @@ stages:
         steps:
           - bash: echo ths is DevStage
   - stage: TestEnv
+    dependsOn: DevEnv
     jobs:
       - job: SecondJob
         steps:
           - bash: echo "This is Test Env"
   - stage: NonProdEnv
+    dependsOn: DevEnv
     jobs:
       - job: thirdJob
         steps:
