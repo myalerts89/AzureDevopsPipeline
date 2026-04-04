@@ -15,6 +15,11 @@ stages:
       - job: FirstJob
         steps:
           - bash: echo ths is DevStage
+          - bash: echo $(Build.ArtifactStagingDirectory)
+          - bash: echo $(Agent.BuildDirectory)
+          - bash: echo $(Agent.Id)
+          - bash: echo $(Agent.Name)
+          - bash: echo $(Agent.OS)
   - stage: TestEnv
     dependsOn: DevEnv
     jobs:
