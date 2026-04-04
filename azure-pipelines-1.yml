@@ -9,26 +9,24 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-
-  stages:
-  - stage: Build Stage
+stages:
+  - stage: DevEnv
     jobs:
-    - job: job1
-      steps:
-        bash: echo "Hello this is build stage"
-    
-  - stage: Test Stage
+      - job: FirstJob
+        steps:
+          - bash: echo ths is DevStage
+  - stage: TestEnv
     jobs:
-    - job:  job2
-      steps: 
-       bash : echo "this is Test Stage"
-  - stage:
+      - job: SecondJob
+        steps:
+          - bash: echo "This is Test Env"
+  - stage: NonProdEnv
     jobs:
-    - job: QADeploy
-      steps:
-        bash: this is QA Deploy
-  - stage:
-    jobs: 
-    - job: ProdDeploy
-      steps:
-        bash: this is Prod Deploy
+      - job: thirdJob
+        steps:
+          - bash: echo "This is NonProd Env"
+  - stage: ProdEnv
+    jobs:
+      - job: FourthJob
+        steps:
+          - bash: echo "this is Prod Env"
