@@ -25,7 +25,7 @@ stages:
           - bash: echo $(Agent.OS)
           - bash: java -version
           - bash: python -V
-          - bash: node -version
+          - bash: node -v
           
   - stage: TestEnv
     dependsOn: DevEnv
@@ -41,7 +41,7 @@ stages:
           - bash: echo "This is NonProd Env"
   - stage: ProdEnv
     dependsOn: 
-        - DevEnv
+        - NonProdEnv
         - TestEnv
     jobs:
       - job: FourthJob
