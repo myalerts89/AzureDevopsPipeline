@@ -26,7 +26,11 @@ stages:
           - bash: java -version
           - bash: python -V
           - bash: node -v
-          
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(Build.ArtifactStagingDirectory)'
+              Content s: '**/*'
+              TargetFolder: '$(Build.BinariesDirectory)'
   - stage: TestEnv
     dependsOn: DevEnv
     jobs:
