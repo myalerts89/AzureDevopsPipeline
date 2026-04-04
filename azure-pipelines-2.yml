@@ -6,19 +6,63 @@
 trigger:
 - main
 
-strategy:
-  matrix:
-    linux: 
-        OpratingSystem : ubuntu-latest
-    mac: 
-      OpratingSystem : macos-latest
+# strategy:
+#   matrix:
+#     linux: 
+#         OpratingSystem : ubuntu-latest
+#     mac: 
+#       OpratingSystem : macos-latest
 
 
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world $(OpratingSystem)!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: DevStage
+    jobs:
+      - job: DevJobs
+        steps:
+          - bash: echo "Deploy the Code in Dev Env"
+  - stage: TestStage
+    jobs:
+      - deployment: TestDeploy
+        environment: TestEnv
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo Hello This is Test Deployment
+  - stage: QAStage
+    jobs:
+      - deployment: QADeploy
+        environment: QA Env
+        strategy:
+         runOnce:
+          deploy:
+            steps:
+              - script: echo Hello this is QA Deployment
+
+  - stage: NonProdStage
+    jobs:
+      - deployment: NonProd
+        environment: NonProd Env
+        strategy:
+          runOnce:
+           deploy:
+             steps:
+               - script: echo Hello this is NonProd Deployment
+  - stage: ProdStage
+    jobs:
+      - deployment: Prod
+        environment: Prod Env
+        strategy:
+          runOnce:
+           deploy:
+             steps:
+               - script: echo Hello this is Prod Deployment
+
+
+
+
 
