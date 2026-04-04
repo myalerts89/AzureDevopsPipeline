@@ -11,7 +11,7 @@ strategy:
     linux: 
         OpratingSystem : ubuntu-latest
     mac: 
-      OpratingSystem : ubuntu-latest
+      OpratingSystem : macos-latest
 
 
 
