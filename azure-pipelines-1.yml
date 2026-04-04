@@ -19,7 +19,14 @@ stages:
           - bash: echo $(Agent.BuildDirectory)
           - bash: echo $(Agent.Id)
           - bash: echo $(Agent.Name)
+          - bash: echo $(Agent.WorkFolder)
+          - bash: echo $(Build.ArtifactStagingDirectory)
+          - bash: echo ls -r $(Build.BinariesDirectory)
           - bash: echo $(Agent.OS)
+          - bash: java -version
+          - bash: python -version
+          - bash: nod -version
+          
   - stage: TestEnv
     dependsOn: DevEnv
     jobs:
@@ -33,6 +40,9 @@ stages:
         steps:
           - bash: echo "This is NonProd Env"
   - stage: ProdEnv
+    dependsOn:
+      - DevEnv
+      - TestEnv
     jobs:
       - job: FourthJob
         steps:
