@@ -24,7 +24,7 @@ stages:
           - bash: echo ls -r $(Build.BinariesDirectory)
           - bash: echo $(Agent.OS)
           - bash: java -version
-          - bash: python -version
+          - bash: python -V
           - bash: nod -version
           
   - stage: TestEnv
@@ -40,9 +40,7 @@ stages:
         steps:
           - bash: echo "This is NonProd Env"
   - stage: ProdEnv
-    dependsOn:
-      - DevEnv
-      - TestEnv
+    dependsOn: TestEnv
     jobs:
       - job: FourthJob
         steps:
