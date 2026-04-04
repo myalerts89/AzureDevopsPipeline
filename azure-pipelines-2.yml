@@ -42,11 +42,23 @@ stages:
           deploy:
             steps:
               - script: echo Hello this is QA Deployment
-
+  - stage: Preprodstage
+    jobs:
+      - deployment: PreProd
+        environment: PreProd Env
+        dependsOn: DevStage
+        strategy:
+         runOnce:
+           deploy:
+             steps:
+               - script: echo Hello this is PreProd Deployment
+         
   - stage: NonProdStage
     jobs:
       - deployment: NonProd
         environment: NonProd Env
+        dependsOn:
+        - DevStage
         strategy:
           runOnce:
            deploy:
@@ -56,6 +68,7 @@ stages:
     jobs:
       - deployment: Prod
         environment: Prod Env
+        dependsOn: Preprodstage
         strategy:
           runOnce:
            deploy:
